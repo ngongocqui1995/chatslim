@@ -14,8 +14,8 @@ class App extends Component {
     super(props)
 
     this.state = {
-      name: "qui",
-      isModalLogin: false,
+      name: "",
+      isModalLogin: true,
       content: [],
       message: ""
     }
