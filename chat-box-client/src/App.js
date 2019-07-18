@@ -44,11 +44,11 @@ class App extends Component {
 
   handleClickOpen = (e) => {
     e.preventDefault()
-    this.setState({ isModalLogin: true })
+
+    this.setState({ isModalLogin: true, name: "", content: [] })
   }
 
-  handleClose = (e) => {
-    e.preventDefault()
+  handleClose = () => {
     this.setState({ isModalLogin: false })
   }
 
@@ -76,6 +76,14 @@ class App extends Component {
     this.setState({ message: e.target.value })
   }
 
+  _handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      if (this.state.name === "") return
+
+      this.handleClose()
+    }
+  }
+
   render() {
     let { name, isModalLogin, message, content } = this.state
 
@@ -89,6 +97,7 @@ class App extends Component {
           <DialogTitle id="alert-dialog-title">{"Đăng nhập"}</DialogTitle>
           <DialogContent>
             <TextField
+              onKeyDown={this._handleKeyDown}
               value={name}
               onChange={this.onChangeName}
               autoFocus
@@ -110,9 +119,9 @@ class App extends Component {
         <>
           <div id="wrapper">
             <div id="menu">
-                  <p className="welcome">{`Xin chào, `}<b>{name}</b></p>
+                  <p style={{fontSize: 14}} className="welcome">{`Xin chào, `}<b>{name}</b></p>
                   <p className="logout">
-                    <a onClick={this.handleClickOpen} id="exit" href={"/"}>Thoát</a>
+                    <a onClick={this.handleClickOpen} style={{fontSize: 14}} id="exit" href={"/"}>Thoát</a>
                   </p>
                   <div style={{clear: "both"}}></div>
               </div>
@@ -120,7 +129,7 @@ class App extends Component {
               <div id="chatbox">
                 {
                   content.map((row, index) => (
-                    <div key={index} className='msgln'>
+                    <div key={index} className='msgln' style={{fontSize: 14}}>
                       {`(${moment(row.date).format("HH:mm:ss")}) `}
                       <b>{`${row.name}`}</b>
                       {`: ${row.message}`}
@@ -131,7 +140,7 @@ class App extends Component {
               
               <form name="message" action="">
                   <input name="usermsg" value={message} onChange={this.onChangeMessage} type="text" id="usermsg" size="63" />
-                  <input name="submitmsg" onClick={this.sendMessage} type="submit" id="submitmsg" value="Gửi" />
+                  <input style={{fontSize: 14}} name="submitmsg" onClick={this.sendMessage} type="submit" id="submitmsg" value="Gửi" />
               </form>
           </div>
         </>
