@@ -21,6 +21,15 @@ class App extends Component {
     }
   }
 
+  scrollBottomChatBox = () => {
+    try{
+      var objDiv = document.getElementById("chatbox");
+      objDiv.scrollTop = objDiv.scrollHeight;
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   chatBox = async(message) => {
     let result = await fetchData._phan_Hoi(message)
     let { traLoi } = result
@@ -30,6 +39,7 @@ class App extends Component {
     content.push({ date: date, name: "slim", message: traLoi })
 
     this.setState({ content: content })
+    this.scrollBottomChatBox()
   }
 
   handleClickOpen = (e) => {
@@ -57,6 +67,7 @@ class App extends Component {
     content.push({ date: date, name: name, message: message })
 
     this.setState({ content: content, message: "" })
+    this.scrollBottomChatBox()
 
     await this.chatBox(message)
   }
