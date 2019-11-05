@@ -25,7 +25,7 @@
     "jsdom": "^12.0.0",
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.22.2",
-    "mongoose": "^5.5.2",
+    "mongoose": "^5.7.5",
     "msnodesqlv8": "^0.8.0",
     "mssql": "^5.1.0",
     "node-rsa": "^1.0.1",
